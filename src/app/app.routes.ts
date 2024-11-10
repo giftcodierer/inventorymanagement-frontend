@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
-import { InventoryManagementListComponent } from './inventory-management-list/inventory-management-list.component'
-import { InventoryManagementDetailComponent } from './inventory-management-list/inventory-management-detail.component'
-import { InventoryManagementLoginComponent } from './inventory-management-list/inventory-management-login.component'
+import { InventoryManagementLoginComponent } from './inventory-management-login/inventory-management-login.component';
+import { InventoryManagementListComponent } from './inventory-management-list/inventory-management-list.component';
+import { InventoryManagementDetailComponent } from './inventory-management-detail/inventory-management-detail.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
   { path: 'login', component: InventoryManagementLoginComponent },
-  { path: 'main', component: InventoryManagementListComponent },
-  { path: 'detail/:id', component: InventoryManagementDetailComponent },
+  { path: 'list', component: InventoryManagementListComponent, canActivate: [AuthGuard]},
+  { path: 'detail/:id', component: InventoryManagementDetailComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
   ];
