@@ -1,0 +1,30 @@
+<div class="table-container">
+    <div class="header">
+      <h2>Kategorien</h2>
+      <button (click)="createCategory()">Kategorie erstellen</button>
+    </div>
+    <p-table [value]="categories" [paginator]="true" [rows]="10" [sortField]="'name'" [sortOrder]="1" [contextMenu]="cm" [(contextMenuSelection)]="selectedCategory" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th>Aktionen</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-category>
+        <tr [pContextMenuRow]="category">
+          <td>{{ category.id }}</td>
+          <td>{{ category.name }}</td>
+          <td>
+            <button pButton class="p-button-rounded p-button-text custom-button" (click)="editCategory(category)">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="deleteCategory(category)">
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-contextMenu #cm [model]="menuItems"></p-contextMenu>
+  </div>

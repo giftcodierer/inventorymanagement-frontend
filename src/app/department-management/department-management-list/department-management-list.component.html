@@ -1,0 +1,33 @@
+<div class="table-container">
+    <div class="header">
+      <h2>Departments</h2>
+      <button (click)="onCreate()">Erstellen</button>
+    </div>
+    <p-table [value]="departments" [paginator]="true" [rows]="10" [sortField]="'name'" [sortOrder]="1" [contextMenu]="cm" [(contextMenuSelection)]="selectedDepartments" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="location">Standort <p-sortIcon field="location"></p-sortIcon></th>
+          <th>Aktionen</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-department>
+        <tr [pContextMenuRow]="department">
+          <td>{{ department.name }}</td>
+          <td>{{ department.location }}</td>
+          <td>
+            <button pButton class="p-button-rounded p-button-text custom-button" (click)="onDetails(department)">
+              <i class="pi pi-eye"></i>
+            </button>
+            <button pButton class="p-button-rounded p-button-text custom-button" (click)="onCopy(department)">
+              <i class="pi pi-copy"></i>
+            </button>
+            <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="onDelete(department)">
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-contextMenu #cm [model]="menuItems"></p-contextMenu>
+  </div>

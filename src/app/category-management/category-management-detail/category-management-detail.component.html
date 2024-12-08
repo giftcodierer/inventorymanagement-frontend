@@ -1,0 +1,15 @@
+<div class="detail-container">
+    <div class="header">
+      <button (click)="goBack()" class="back-button">Zurück</button>
+      <h2>Kategorie erstellen</h2>
+      <button (click)="saveCategory()">Speichern</button>
+    </div>
+    <div class="detail-card">
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" type="text" [(ngModel)]="name" name="name" required>
+        </div>
+      </form>
+    </div>
+  </div>

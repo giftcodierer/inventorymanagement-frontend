@@ -1,0 +1,19 @@
+<div class="p-fluid">
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" pInputText [(ngModel)]="name" />
+    </div>
+    <div class="p-field">
+      <label for="location">Standort</label>
+      <input id="location" type="text" pInputText [(ngModel)]="location" />
+    </div>
+    <button pButton label="Hinzufügen" class="p-button-success" icon="pi pi-plus" (click)="addDepartment()"></button>
+  </div>
+  
+  <h3 class="mt-3">Hinzugefügte Departments</h3>
+  <ul>
+    <li *ngFor="let department of departments">
+      {{ department.name }} ({{ department.location }})
+    </li>
+  </ul>
+  

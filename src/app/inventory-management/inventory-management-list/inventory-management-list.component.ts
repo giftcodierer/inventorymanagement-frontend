@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
+import { Department } from '../../department-management/department-management-list/department.model';
 
 interface Item {
   id: number;
@@ -12,7 +13,7 @@ interface Item {
   deviceCondition: string;
   loanDuration: string;
   testInput: string;
-  department: string;
+  department: Department;
 }
 
 @Component({
@@ -24,9 +25,9 @@ interface Item {
 })
 export class InventoryManagementListComponent {
   items: Item[] = [
-    { id: 1, deviceName: 'Device 1', deviceCondition: 'New', loanDuration: '1 week', testInput: 'Test 1', department: 'IT' },
-    { id: 2, deviceName: 'Device 2', deviceCondition: 'Used', loanDuration: '2 weeks', testInput: 'Test 2', department: 'HR' },
-    { id: 3, deviceName: 'Device 3', deviceCondition: 'Refurbished', loanDuration: '3 weeks', testInput: 'Test 3', department: 'Finance' }
+    { id: 1, deviceName: 'Device 1', deviceCondition: 'New', loanDuration: '1 week', testInput: 'Test 1', department: { id: 1, name: 'IT', location: 'Building A' } },
+    { id: 2, deviceName: 'Device 2', deviceCondition: 'Used', loanDuration: '2 weeks', testInput: 'Test 2', department: { id: 2, name: 'HR', location: 'Building B' } },
+    { id: 3, deviceName: 'Device 3', deviceCondition: 'Refurbished', loanDuration: '3 weeks', testInput: 'Test 3', department: { id: 3, name: 'Finance', location: 'Building C' } }
   ];
 
   selectedItem: Item | null = null;
@@ -46,22 +47,19 @@ export class InventoryManagementListComponent {
 
   editItem(item: Item | null) {
     if (item) {
-      console.log('Bearbeiten', item);
-      // Hier können Sie die Logik zum Bearbeiten des Eintrags hinzufügen
+      this.router.navigate(['/detail', item.id]);
     }
   }
 
   copyItem(item: Item | null) {
     if (item) {
       console.log('Kopieren', item);
-      // Hier können Sie die Logik zum Kopieren des Eintrags hinzufügen
     }
   }
 
   deleteItem(item: Item | null) {
     if (item) {
       console.log('Löschen', item);
-      // Hier können Sie die Logik zum Löschen des Eintrags hinzufügen
     }
   }
 }
