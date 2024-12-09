@@ -1,68 +1,69 @@
 .table-container {
-    margin: 20px;
-    height: calc(100vh - 40px); /* Gesamthöhe minus Margin */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Zentriert die Tabelle horizontal */
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80vw; /* Gleiche Breite wie die Tabelle */
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    margin: 0;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #28a745; /* Grün */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #218838; /* Dunkleres Grün beim Hover */
-  }
-  
-  p-table {
-    width: 80vw; /* 80% der Bildschirmbreite */
-    height: calc(80vh - 100px); /* 80% der Bildschirmhöhe minus Platz für Header */
-    overflow: auto;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  .custom-button {
-    background-color: white !important;
-    border: 1px solid #ccc !important;
-    color: black !important;
-  }
-  
-  .custom-button:hover {
-    background-color: #f2f2f2 !important;
-  }
-  
-  .custom-button-danger {
-    background-color: white !important;
-    border: 1px solid #ccc !important;
-    color: red !important;
-  }
-  
-  .custom-button-danger:hover {
-    background-color: #f2f2f2 !important;
-  }
+  margin: 20px;
+  height: calc(100vh - 40px); /* Gesamthöhe minus Margin */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert die Tabelle horizontal */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw; /* Gleiche Breite wie die Tabelle */
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin: 0;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #28a745; /* Grün */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #218838; /* Dunkleres Grün beim Hover */
+}
+
+p-table {
+  width: 80vw; /* 80% der Bildschirmbreite */
+  height: calc(80vh - 100px); /* 80% der Bildschirmhöhe minus Platz für Header */
+  overflow: auto;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  width: 33%; /* Jede Spalte nimmt ein Drittel der Breite ein */
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.custom-button {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  color: black !important;
+}
+
+.custom-button:hover {
+  background-color: #f2f2f2 !important;
+}
+
+.custom-button-danger {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  color: red !important;
+}
+
+.custom-button-danger:hover {
+  background-color: #f2f2f2 !important;
+}

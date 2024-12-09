@@ -7,13 +7,14 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
 import { Department } from '../../department-management/department-management-list/department.model';
 
+
 interface Item {
   id: number;
   deviceName: string;
   deviceCondition: string;
   loanDuration: string;
   testInput: string;
-  department: Department;
+  department: Department; // Verknüpfung zu Department
 }
 
 @Component({
@@ -31,6 +32,7 @@ export class InventoryManagementListComponent {
   ];
 
   selectedItem: Item | null = null;
+  selectedItems: Item[] = [];
   menuItems: MenuItem[];
 
   constructor(private router: Router) {
@@ -61,5 +63,10 @@ export class InventoryManagementListComponent {
     if (item) {
       console.log('Löschen', item);
     }
+  }
+
+  loanSelectedItems() {
+    console.log('Ausgewählte Geräte ausleihen', this.selectedItems);
+    // Hier können Sie die Logik zum Ausleihen der ausgewählten Geräte hinzufügen
   }
 }

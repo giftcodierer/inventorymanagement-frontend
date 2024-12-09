@@ -23,6 +23,7 @@ export class CategoryManagementListComponent {
   ];
 
   selectedCategory: Category | null = null;
+  selectedCategories: Category[] = [];
   menuItems: MenuItem[];
 
   constructor(private router: Router) {
@@ -33,12 +34,12 @@ export class CategoryManagementListComponent {
   }
 
   createCategory() {
-    this.router.navigate(['/category-detail']);
+    this.router.navigate(['/category/new']);
   }
 
   editCategory(category: Category | null) {
     if (category) {
-      this.router.navigate(['/category-detail', category.id]);
+      this.router.navigate(['/category/detail', category.id]);
     }
   }
 
@@ -46,5 +47,9 @@ export class CategoryManagementListComponent {
     if (category) {
       console.log('Löschen', category);
     }
+  }
+
+  onCopy(category: Category) {
+    console.log('Kopieren', category);
   }
 }

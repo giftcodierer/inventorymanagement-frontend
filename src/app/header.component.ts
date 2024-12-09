@@ -76,9 +76,9 @@ export class HeaderComponent implements OnInit {
         label: 'Menu',
         icon: 'pi pi-bars',
         items: [
-          { label: 'Category', icon: 'pi pi-fw pi-list', routerLink: '/category/list' },
-          { label: 'Products', icon: 'pi pi-fw pi-box', routerLink: '/list' },
-          { label: 'Department', icon: 'pi pi-fw pi-user', routerLink: '/department/list' }
+          { label: 'Inventar', icon: 'pi pi-fw pi-box', routerLink: '/list' },
+          { label: 'Kategorien', icon: 'pi pi-fw pi-list', routerLink: '/category/list' },
+          { label: 'Abteilungen', icon: 'pi pi-fw pi-user', routerLink: '/department/list' }
         ]
       }
     ];
