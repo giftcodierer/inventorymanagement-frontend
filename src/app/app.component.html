@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<app-header>
+    <button (click)="logout()">Abmelden</button>
+</app-header> 
+<div class="content-page">
+  <router-outlet />
+</div>
+<app-footer />

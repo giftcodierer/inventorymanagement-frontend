@@ -1,7 +1,7 @@
 <div class="detail-container">
   <div class="header">
     <button (click)="goBack()" class="back-button">Zurück</button>
-    <h2>Eintrag erstellen</h2>
+    <h2>{{ id ? 'Eintrag bearbeiten' : 'Eintrag erstellen' }}</h2>
     <button (click)="saveEntry()">Speichern</button>
   </div>
   <div class="detail-card">
@@ -19,8 +19,10 @@
         <input id="loanDuration" type="text" [(ngModel)]="loanDuration" name="loanDuration" required>
       </div>
       <div class="form-group">
-        <label for="testInput">Testinput</label>
-        <input id="testInput" type="text" [(ngModel)]="testInput" name="testInput" required>
+        <label for="category">Kategorie</label>
+        <select id="category" [(ngModel)]="categoryId" name="category" required>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="department">Abteilung</label>

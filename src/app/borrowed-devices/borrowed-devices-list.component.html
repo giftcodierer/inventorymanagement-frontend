@@ -1,0 +1,43 @@
+<div class="table-container">
+    <div class="header">
+      <h2>Ausgeliehene Geräte</h2>
+    </div>
+    <p-table [value]="devices" selectionMode="multiple" [(selection)]="selectedDevices" [paginator]="true" [rows]="10" [sortField]="'deviceName'" [sortOrder]="1" [contextMenu]="cm" [(contextMenuSelection)]="selectedDevice" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3em">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="deviceName">Gerätename <p-sortIcon field="deviceName"></p-sortIcon></th>
+          <th pSortableColumn="deviceCondition">Gerätezustand <p-sortIcon field="deviceCondition"></p-sortIcon></th>
+          <th pSortableColumn="loanDuration">Ausleihdauer <p-sortIcon field="loanDuration"></p-sortIcon></th>
+          <th pSortableColumn="testInput">Testinput <p-sortIcon field="testInput"></p-sortIcon></th>
+          <th pSortableColumn="department.name">Abteilung <p-sortIcon field="department.name"></p-sortIcon></th>
+          <th>Aktionen</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-device>
+        <tr [pContextMenuRow]="device">
+          <td style="width: 3em">
+            <p-tableCheckbox [value]="device"></p-tableCheckbox>
+          </td>
+          <td>{{ device.id }}</td>
+          <td>{{ device.deviceName }}</td>
+          <td>{{ device.deviceCondition }}</td>
+          <td>{{ device.loanDuration }}</td>
+          <td>{{ device.testInput }}</td>
+          <td>{{ device.department.name }}</td>
+          <td>
+            <button pButton class="p-button-rounded p-button-text custom-button" (click)="editDevice(device)">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="deleteDevice(device)">
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-contextMenu #cm [model]="menuItems"></p-contextMenu>
+  </div>

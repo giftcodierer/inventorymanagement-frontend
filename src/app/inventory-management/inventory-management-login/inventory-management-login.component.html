@@ -1,22 +1,16 @@
 <div class="login-container">
-    <div class="login-card">
-      <div class="login-header">
-        <h2>Inventur Management</h2>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username">Benutzername</label>
+        <input id="username" type="text" pInputText [(ngModel)]="username" name="username" required>
       </div>
-      <div class="login-body">
-        <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" type="text" [(ngModel)]="username" name="username" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" type="password" [(ngModel)]="password" name="password" required>
-          </div>
-          <div class="form-actions">
-            <button type="submit">Login</button>
-          </div>
-        </form>
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input id="password" type="password" pPassword [(ngModel)]="password" name="password" required [feedback]="false">
       </div>
-    </div>
+      <button pButton type="submit" label="Login"></button>
+    </form>
   </div>
+</div>

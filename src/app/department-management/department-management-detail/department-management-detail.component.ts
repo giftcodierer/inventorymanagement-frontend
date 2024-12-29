@@ -1,25 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DepartmentService } from '../../services/department.service';
+import { Department } from '../department-management-list/department.model';
+
 
 @Component({
   selector: 'app-department-management-detail',
   standalone: true,
-  imports: [BrowserModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './department-management-detail.component.html',
-  styleUrl: './department-management-detail.component.css'
+  styleUrls: ['./department-management-detail.component.css']
 })
-
-export class DepartmentDetailComponent {
+export class DepartmentManagementDetailComponent implements OnInit {
   name: string = '';
   location: string = '';
-  departments: { name: string; location: string }[] = [];
+  id: number | null = null;
 
-  addDepartment() {
-    if (this.name && this.location) {
-      this.departments.push({ name: this.name, location: this.location });
-      this.name = '';
-      this.location = '';
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private departmentService: DepartmentService
+  ) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.id = Number(params.get('id'));
+      if (this.id) {
+        this.departmentService.getDepartment(this.id).subscribe(
+          (department: Department) => {
+            this.name = department.name;
+            this.location = department.location;
+          },
+          error => {
+            console.error('Fehler beim Laden der Abteilung', error);
+          }
+        );
+      }
+    });
+  }
+
+  saveDepartment() {
+    const department: Department = { id: this.id!, name: this.name, location: this.location };
+    if (this.id) {
+      this.departmentService.updateDepartment(this.id, department).subscribe(
+        response => {
+          console.log('Abteilung erfolgreich aktualisiert', response);
+          this.router.navigate(['/department/list']);
+        },
+        error => {
+          console.error('Fehler beim Aktualisieren der Abteilung', error);
+        }
+      );
+    } else {
+      this.departmentService.createDepartment(department).subscribe(
+        response => {
+          console.log('Abteilung erfolgreich erstellt', response);
+          this.router.navigate(['/department/list']);
+        },
+        error => {
+          console.error('Fehler beim Erstellen der Abteilung', error);
+        }
+      );
     }
+  }
+
+  goBack() {
+    // Zur Liste zurücknavigieren
+    this.router.navigate(['/department/list']);
   }
 }

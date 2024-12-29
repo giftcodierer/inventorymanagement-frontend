@@ -1,7 +1,7 @@
 <div class="table-container">
   <div class="header">
     <h2>Abteilungen</h2>
-    <button (click)="onCreate()">Abteilung erstellen</button>
+    <button (click)="createDepartment()">Abteilung erstellen</button>
   </div>
   <p-table [value]="departments" selectionMode="multiple" [(selection)]="selectedDepartments" [paginator]="true" [rows]="10" [sortField]="'name'" [sortOrder]="1" [contextMenu]="cm" [(contextMenuSelection)]="selectedDepartment" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
     <ng-template pTemplate="header">
@@ -22,13 +22,13 @@
         <td style="width: 33%">{{ department.name }}</td>
         <td style="width: 33%">{{ department.location }}</td>
         <td style="width: 33%">
-          <button pButton class="p-button-rounded p-button-text custom-button" (click)="onDetails(department)">
+          <button pButton class="p-button-rounded p-button-text custom-button" (click)="editDepartment(department)">
             <i class="pi pi-pencil"></i>
           </button>
           <button pButton class="p-button-rounded p-button-text custom-button" (click)="onCopy(department)">
             <i class="pi pi-copy"></i>
           </button>
-          <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="onDelete(department)">
+          <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="deleteDepartment(department)">
             <i class="pi pi-trash"></i>
           </button>
         </td>
