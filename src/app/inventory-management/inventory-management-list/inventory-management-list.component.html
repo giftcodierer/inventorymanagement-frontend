@@ -1,12 +1,12 @@
 <div class="table-container">
   <div class="header">
-    <h2>Inventar</h2>
+    <h2>Geräteverwaltung</h2>
     <div class="button-group">
-      <button [disabled]="selectedItems.length === 0">Geräte ausleihen</button>
-      <button *ngIf="authService.isAdmin()" (click)="createEntry()">Eintrag erstellen</button>
+      <button *ngIf="isAdmin" (click)="createEntry()">Item anlegen</button>
+      <button (click)="borrowDevices()" [disabled]="selectedItems.length === 0">Gerät(e) ausleihen</button> 
     </div>
   </div>
-  <p-table [value]="items" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10" [sortField]="'deviceName'" [sortOrder]="1" [contextMenu]="cm" [(contextMenuSelection)]="selectedItem" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
+  <p-table [value]="items" [paginator]="true" selectionMode="multiple" [(selection)]="selectedItems" [rows]="10" [sortField]="'deviceName'" [sortOrder]="1" [ngStyle]="{'height': 'calc(80vh - 100px)', 'width': '80vw'}">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 3em">
@@ -15,32 +15,35 @@
         <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
         <th pSortableColumn="deviceName">Gerätename <p-sortIcon field="deviceName"></p-sortIcon></th>
         <th pSortableColumn="deviceCondition">Gerätezustand <p-sortIcon field="deviceCondition"></p-sortIcon></th>
-        <th pSortableColumn="loanDuration">Ausleihdauer <p-sortIcon field="loanDuration"></p-sortIcon></th>
+        <th pSortableColumn="borrowedUntil">Ausleihdauer <p-sortIcon field="borrowedUntil"></p-sortIcon></th>
         <th pSortableColumn="category.name">Kategorie <p-sortIcon field="category.name"></p-sortIcon></th>
         <th pSortableColumn="department.name">Abteilung <p-sortIcon field="department.name"></p-sortIcon></th>
-        <th *ngIf="isAdmin">Aktionen</th>
+        <th> Aktionen</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
       <tr [pContextMenuRow]="item">
         <td style="width: 3em">
-          <p-tableCheckbox [value]="item"></p-tableCheckbox>
+          <p-tableCheckbox [value]="item" [disabled]="item.borrowedUntil !== null"></p-tableCheckbox>
         </td>
         <td>{{ item.id }}</td>
         <td>{{ item.deviceName }}</td>
         <td>{{ item.deviceCondition }}</td>
-        <td>{{ item.loanDuration }}</td>
+        <td>{{ item.borrowedUntil ? item.borrowedUntil : '-' }}</td>
         <td>{{ item.category.name }}</td>
         <td>{{ item.department.name }}</td>
-        <td *ngIf="isAdmin">
+        <td>
           <button pButton class="p-button-rounded p-button-text custom-button" (click)="editItem(item)">
             <i class="pi pi-pencil"></i>
           </button>
-          <button pButton class="p-button-rounded p-button-text custom-button" (click)="copyItem(item)">
+          <button *ngIf="isAdmin" pButton class="p-button-rounded p-button-text custom-button" (click)="copyItem(item)">
             <i class="pi pi-copy"></i>
           </button>
-          <button pButton class="p-button-rounded p-button-text custom-button-danger" (click)="deleteItem(item)">
+          <button *ngIf="isAdmin" pButton class="p-button-rounded p-button-text custom-button-danger" (click)="deleteItem(item)">
             <i class="pi pi-trash"></i>
+          </button>
+          <button *ngIf="isAdmin" pButton class="p-button-rounded p-button-text custom-button" (click)="generateQrCode(item)">
+            <i class="pi pi-qrcode"></i>
           </button>
         </td>
       </tr>

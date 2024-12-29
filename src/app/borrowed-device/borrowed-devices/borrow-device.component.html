@@ -1,0 +1,16 @@
+<div class="borrow-container" *ngIf="items.length > 0">
+  <h2>Geräte ausleihen</h2>
+  <form [formGroup]="borrowForm" (ngSubmit)="borrowItems()">
+    <div class="form-group">
+      <label for="deviceNames">Geräte</label>
+      <ul>
+        <li *ngFor="let item of items">{{ item.deviceName }}</li>
+      </ul>
+    </div>
+    <div class="form-group">
+      <label for="borrowDays">Ausleihdauer in Tagen</label>
+      <p-inputNumber id="borrowDays" formControlName="borrowDays" [min]="1" [max]="365" [showButtons]="true"></p-inputNumber>
+    </div>
+    <button pButton type="submit" label="Ausleihen" [disabled]="borrowForm.invalid"></button>
+  </form>
+</div>

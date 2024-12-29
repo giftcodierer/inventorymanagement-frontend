@@ -51,6 +51,21 @@ export class AuthService {
     return null;
   }
 
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        console.log('Decoded token:', decoded); // Log the decoded token
+        return decoded.userID; // Assuming the token contains a userId field
+      } catch (error) {
+        console.error('Fehler beim Dekodieren des Tokens', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       return !!localStorage.getItem('token'); // Überprüfen, ob der JWT-Token im Local Storage vorhanden ist

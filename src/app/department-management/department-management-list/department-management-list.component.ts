@@ -8,7 +8,6 @@ import { MenuItem } from 'primeng/api';
 import { Department } from './department.model';
 import { DepartmentService } from '../../services/department.service';
 
-
 @Component({
   selector: 'app-department-management-list',
   standalone: true,
@@ -68,17 +67,19 @@ export class DepartmentManagementListComponent implements OnInit {
     }
   }
 
-  copyDepartment(department: Department) {
-    const newDepartment: Department = { id: 0, name: department.name, location: department.location };
-    this.departmentService.createDepartment(newDepartment).subscribe(
-      response => {
-        console.log('Abteilung erfolgreich kopiert', response);
-        this.loadDepartments(); // Liste neu laden
-      },
-      error => {
-        console.error('Fehler beim Kopieren der Abteilung', error);
-      }
-    );
+  copyDepartment(department: Department | null) {
+    if (department) {
+      const { id, ...newDepartment } = department; // ID entfernen
+      this.departmentService.createDepartment(newDepartment as Department).subscribe(
+        response => {
+          console.log('Abteilung erfolgreich kopiert', response);
+          this.loadDepartments(); // Liste neu laden
+        },
+        error => {
+          console.error('Fehler beim Kopieren der Abteilung', error);
+        }
+      );
+    }
   }
 
   onCopy(department: Department) {

@@ -8,7 +8,6 @@ import { MenuItem } from 'primeng/api';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../category.model';
 
-
 @Component({
   selector: 'app-category-management-list',
   standalone: true,
@@ -68,17 +67,19 @@ export class CategoryManagementListComponent implements OnInit {
     }
   }
 
-  copyCategory(category: Category) {
-    const newCategory: Category = { id: category.id, name: category.name };
-    this.categoryService.createCategory(newCategory).subscribe(
-      response => {
-        console.log('Kategorie erfolgreich kopiert', response);
-        this.loadCategories(); // Liste neu laden
-      },
-      error => {
-        console.error('Fehler beim Kopieren der Kategorie', error);
-      }
-    );
+  copyCategory(category: Category | null) {
+    if (category) {
+      const { id, ...newCategory } = category; // ID entfernen
+      this.categoryService.createCategory(newCategory as Category).subscribe(
+        response => {
+          console.log('Kategorie erfolgreich kopiert', response);
+          this.loadCategories(); // Liste neu laden
+        },
+        error => {
+          console.error('Fehler beim Kopieren der Kategorie', error);
+        }
+      );
+    }
   }
 
   onCopy(category: Category) {

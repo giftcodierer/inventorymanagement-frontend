@@ -5,7 +5,10 @@ export interface Item {
   id: number;
   deviceName: string;
   deviceCondition: string;
-  loanDuration: string;
+  borrowedUntil: string | null; // Hinzufügen der borrowedUntil-Eigenschaft
+  borrowedByID: string | null; // Hinzufügen der borrowedByID-Eigenschaft
+  borrowDuration: string | null; // Hinzufügen der borrowDuration-Eigenschaft
+  loanDuration: string | null; // Hinzufügen der loanDuration-Eigenschaft
   category: Category;
   department: Department;
 }

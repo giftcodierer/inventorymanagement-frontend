@@ -85,4 +85,29 @@ export class InventoryManagementListComponent implements OnInit {
       );
     }
   }
+  borrowDevices(): void {
+    if (this.selectedItems.length > 0) {
+      const itemIds = this.selectedItems.map(item => item.id);
+      this.router.navigate(['/borrow'], { state: { itemIds } });
+    } else {
+      alert('Bitte wählen Sie mindestens ein Gerät aus.');
+    }
+  }
+
+  generateQrCode(item: Item): void {
+    const url = `http://localhost:4200/detail/${item.id}`;
+    const qrCodeApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+
+    fetch(qrCodeApiUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `QRCode_${item.id}.png`;
+        link.click();
+      })
+      .catch(error => {
+        console.error('Fehler beim Generieren des QR-Codes', error);
+      });
+  }
 }
