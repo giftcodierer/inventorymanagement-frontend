@@ -90,3 +90,13 @@ input[type="text"]:focus, select:focus {
   border-color: #007bff;
   outline: none;
 }
+
+.button-group {
+  display: flex;
+  gap: 5px; /* Abstand von 5px zwischen den Buttons */
+}
+
+button:disabled {
+  background-color: #cccccc; /* Grau für deaktivierte Buttons */
+  cursor: not-allowed;
+}

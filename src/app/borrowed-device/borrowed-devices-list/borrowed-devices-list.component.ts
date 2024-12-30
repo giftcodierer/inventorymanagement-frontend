@@ -4,9 +4,9 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import { ItemService } from '../../services/item.service'; // Importieren Sie den ItemService
-import { AuthService } from '../../services/auth.service'; // Importieren Sie den AuthService
-import { Item } from '../../inventory-management/item.model'; // Importieren Sie das Item-Modell
+import { ItemService } from '../../services/item.service'; 
+import { AuthService } from '../../services/auth.service'; 
+import { Item } from '../../inventory-management/item.model';
 
 @Component({
   selector: 'app-borrowed-devices-list',
@@ -16,11 +16,11 @@ import { Item } from '../../inventory-management/item.model'; // Importieren Sie
   styleUrls: ['./borrowed-devices-list.component.css']
 })
 export class BorrowedDevicesListComponent implements OnInit {
-  borrowedItems: Item[] = []; // Verwenden Sie das Item-Modell
+  borrowedItems: Item[] = []; 
 
   constructor(
-    private itemService: ItemService, // Injizieren Sie den ItemService
-    private authService: AuthService, // Injizieren Sie den AuthService
+    private itemService: ItemService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -29,7 +29,7 @@ export class BorrowedDevicesListComponent implements OnInit {
   }
 
   loadBorrowedItems(): void {
-    const userId = this.authService.getUserId(); // Holen Sie die Benutzer-ID
+    const userId = this.authService.getUserId(); 
     if (userId) {
       this.itemService.getBorrowedDevicesByUser(userId).subscribe(
         (items) => {
@@ -47,7 +47,7 @@ export class BorrowedDevicesListComponent implements OnInit {
   returnItem(item: Item): void {
     this.itemService.returnItem(item.id).subscribe(
       () => {
-        this.loadBorrowedItems(); // Aktualisieren Sie die Liste der ausgeliehenen Geräte
+        this.loadBorrowedItems(); 
         alert('Gerät erfolgreich zurückgegeben');
       },
       (error) => {

@@ -33,20 +33,17 @@ export class BorrowDeviceComponent implements OnInit {
 
   ngOnInit(): void {
     const itemIds = history.state.itemIds;
-    console.log('Received itemIds:', itemIds); // Debugging log
     if (itemIds && itemIds.length > 0) {
       this.itemService.getItemsByIds(itemIds).subscribe(
         (data) => {
           this.items = data;
-          console.log('Loaded items:', this.items); // Debugging log
         },
         (error) => {
           console.error('Fehler beim Laden der Items', error);
         }
       );
     } else {
-      console.log('No itemIds found, navigating back to list'); // Debugging log
-      this.router.navigate(['/list']);
+     this.router.navigate(['/list']);
     }
   }
 
@@ -60,9 +57,7 @@ export class BorrowDeviceComponent implements OnInit {
         token
       };
 
-      console.log('Borrow data to be sent:', borrowData); // Debugging log
-
-      // Senden Sie die Ausleihinformationen an das Backend
+      
       this.itemService.borrowMultipleItems(borrowData).subscribe(
         () => {
           alert('Geräte erfolgreich ausgeliehen');
@@ -73,7 +68,7 @@ export class BorrowDeviceComponent implements OnInit {
         }
       );
     } else {
-      console.log('Borrow form is invalid'); // Debugging log
+      console.log('Borrow form is invalid'); 
     }
   }
 }

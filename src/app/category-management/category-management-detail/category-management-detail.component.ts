@@ -44,7 +44,6 @@ export class CategoryManagementDetailComponent implements OnInit {
       const updatedCategory: Category = { id: this.id, name: this.name };
       this.categoryService.updateCategory(this.id, updatedCategory).subscribe(
         response => {
-          console.log('Kategorie erfolgreich aktualisiert', response);
           this.router.navigate(['/category/list']);
         },
         error => {
@@ -55,7 +54,6 @@ export class CategoryManagementDetailComponent implements OnInit {
       const newCategory = { id: this.id ?? 0, name: this.name };
       this.categoryService.createCategory(newCategory).subscribe(
         response => {
-          console.log('Kategorie erfolgreich erstellt', response);
           this.router.navigate(['/category/list']);
         },
         error => {
@@ -66,7 +64,6 @@ export class CategoryManagementDetailComponent implements OnInit {
   }
 
   goBack() {
-    // Zur Liste zurücknavigieren
     this.router.navigate(['/category/list']);
   }
 }

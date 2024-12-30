@@ -12,7 +12,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/auth'; // Backend-URL
   private token: string | null = null;
   private userRole: string | null = null;
-  private authStatusSubject = new Subject<void>(); // Subject für Authentifizierungsänderungen
+  private authStatusSubject = new Subject<void>(); 
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -23,10 +23,9 @@ export class AuthService {
           this.token = response.jwt;
           this.userRole = response.role;
           if (isPlatformBrowser(this.platformId)) {
-            localStorage.setItem('token', response.jwt); // Speichern des Tokens im Local Storage
+            localStorage.setItem('token', response.jwt); 
           }
-          this.authStatusSubject.next(); // Authentifizierungsstatus aktualisieren
-          console.log('Received token:', this.token); // Log the received token
+          this.authStatusSubject.next(); 
         }
       }),
       catchError((error) => {
@@ -41,7 +40,6 @@ export class AuthService {
     if (token) {
       try {
         const decoded: any = jwtDecode(token);
-        console.log('Decoded token:', decoded); // Log the decoded token
         return decoded.role;
       } catch (error) {
         console.error('Fehler beim Dekodieren des Tokens', error);
@@ -56,8 +54,7 @@ export class AuthService {
     if (token) {
       try {
         const decoded: any = jwtDecode(token);
-        console.log('Decoded token:', decoded); // Log the decoded token
-        return decoded.userID; // Assuming the token contains a userId field
+        return decoded.userID;
       } catch (error) {
         console.error('Fehler beim Dekodieren des Tokens', error);
         return null;
@@ -68,18 +65,18 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
-      return !!localStorage.getItem('token'); // Überprüfen, ob der JWT-Token im Local Storage vorhanden ist
+      return !!localStorage.getItem('token');
     }
     return false;
   }
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token'); // Entfernen des Tokens aus dem Local Storage
+      localStorage.removeItem('token');
     }
     this.token = null;
     this.userRole = null;
-    this.authStatusSubject.next(); // Authentifizierungsstatus aktualisieren
+    this.authStatusSubject.next(); 
   }
 
   getToken(): string | null {

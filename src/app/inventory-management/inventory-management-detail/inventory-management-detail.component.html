@@ -4,7 +4,7 @@
     <h2>{{ id ? 'Eintrag bearbeiten' : 'Eintrag erstellen' }}</h2>
     <div class="button-group">
       <button *ngIf="userRole !== 'USER'" type="button" class="save-button" (click)="saveEntry()">Speichern</button>
-      <button class="custom-button" (click)="borrowDevices()">Gerät ausleihen</button>
+      <button [disabled]="borrowedUntil !== null" (click)="borrowDevices()">Gerät ausleihen</button>
     </div>
 </div>
   <div class="detail-card">

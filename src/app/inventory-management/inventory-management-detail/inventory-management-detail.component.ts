@@ -27,6 +27,7 @@ export class InventoryManagementDetailComponent implements OnInit {
   categories: Category[] = [];
   departments: Department[] = [];
   userRole: string | null = null;
+  borrowedUntil: Date | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class InventoryManagementDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userRole = this.authService.getRole(); // Benutzerrolle abrufen
+    this.userRole = this.authService.getRole(); 
 
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
@@ -49,6 +50,7 @@ export class InventoryManagementDetailComponent implements OnInit {
           this.loanDuration = item.loanDuration || '';
           this.categoryId = item.category.id;
           this.departmentId = item.department.id;
+          this.borrowedUntil = item.borrowedUntil;
         });
       }
     });
@@ -75,7 +77,7 @@ export class InventoryManagementDetailComponent implements OnInit {
       deviceName: this.deviceName,
       deviceCondition: this.deviceCondition,
       loanDuration: this.loanDuration,
-      borrowedUntil: null,
+      borrowedUntil: this.borrowedUntil,
       borrowedByID: null,
       borrowDuration: null,
       category: { id: this.categoryId!, name: "" },

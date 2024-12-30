@@ -46,7 +46,6 @@ export class DepartmentManagementDetailComponent implements OnInit {
     if (this.id) {
       this.departmentService.updateDepartment(this.id, department).subscribe(
         response => {
-          console.log('Abteilung erfolgreich aktualisiert', response);
           this.router.navigate(['/department/list']);
         },
         error => {
@@ -56,7 +55,6 @@ export class DepartmentManagementDetailComponent implements OnInit {
     } else {
       this.departmentService.createDepartment(department).subscribe(
         response => {
-          console.log('Abteilung erfolgreich erstellt', response);
           this.router.navigate(['/department/list']);
         },
         error => {
@@ -67,7 +65,6 @@ export class DepartmentManagementDetailComponent implements OnInit {
   }
 
   goBack() {
-    // Zur Liste zurücknavigieren
     this.router.navigate(['/department/list']);
   }
 }

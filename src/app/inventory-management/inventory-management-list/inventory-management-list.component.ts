@@ -60,11 +60,10 @@ export class InventoryManagementListComponent implements OnInit {
 
   copyItem(item: Item | null) {
     if (item) {
-      const { id, ...newItem } = item; // ID entfernen
+      const { id, ...newItem } = item; 
       this.itemService.createItem(newItem as Item).subscribe(
         response => {
-          console.log('Gerät erfolgreich kopiert', response);
-          this.loadItems(); // Liste neu laden
+          this.loadItems(); 
         },
         error => {
           console.error('Fehler beim Kopieren des Geräts', error);
@@ -85,6 +84,7 @@ export class InventoryManagementListComponent implements OnInit {
       );
     }
   }
+  
   borrowDevices(): void {
     if (this.selectedItems.length > 0) {
       const itemIds = this.selectedItems.map(item => item.id);
