@@ -57,8 +57,7 @@ export class DepartmentManagementListComponent implements OnInit {
     if (department && department.id) {
       this.departmentService.deleteDepartment(department.id).subscribe(
         () => {
-          console.log('Abteilung erfolgreich gelöscht');
-          this.loadDepartments(); // Liste neu laden
+          this.loadDepartments(); 
         },
         error => {
           console.error('Fehler beim Löschen der Abteilung', error);
@@ -72,8 +71,7 @@ export class DepartmentManagementListComponent implements OnInit {
       const { id, ...newDepartment } = department; // ID entfernen
       this.departmentService.createDepartment(newDepartment as Department).subscribe(
         response => {
-          console.log('Abteilung erfolgreich kopiert', response);
-          this.loadDepartments(); // Liste neu laden
+          this.loadDepartments(); 
         },
         error => {
           console.error('Fehler beim Kopieren der Abteilung', error);

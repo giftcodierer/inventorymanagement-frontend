@@ -57,8 +57,7 @@ export class CategoryManagementListComponent implements OnInit {
     if (category && category.id) {
       this.categoryService.deleteCategory(category.id).subscribe(
         () => {
-          console.log('Kategorie erfolgreich gelöscht');
-          this.loadCategories(); // Liste neu laden
+          this.loadCategories(); 
         },
         error => {
           console.error('Fehler beim Löschen der Kategorie', error);
@@ -69,11 +68,10 @@ export class CategoryManagementListComponent implements OnInit {
 
   copyCategory(category: Category | null) {
     if (category) {
-      const { id, ...newCategory } = category; // ID entfernen
+      const { id, ...newCategory } = category; 
       this.categoryService.createCategory(newCategory as Category).subscribe(
         response => {
-          console.log('Kategorie erfolgreich kopiert', response);
-          this.loadCategories(); // Liste neu laden
+          this.loadCategories(); 
         },
         error => {
           console.error('Fehler beim Kopieren der Kategorie', error);

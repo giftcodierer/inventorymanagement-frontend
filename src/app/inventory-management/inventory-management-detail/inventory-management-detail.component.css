@@ -8,12 +8,21 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
 .detail-container {
   width: 80vw;
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -95,7 +104,6 @@ input[type="text"]:focus, select:focus {
   display: flex;
   gap: 5px; /* Abstand von 5px zwischen den Buttons */
 }
-
 button:disabled {
   background-color: #cccccc; /* Grau für deaktivierte Buttons */
   cursor: not-allowed;
